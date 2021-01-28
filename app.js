@@ -8,10 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 
-var index = require('./routes/index');
 var hello = require('./routes/hello');
-// Example route
-// var user = require('./routes/user');
 
 var app = express();
 
@@ -25,7 +22,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('IxD secret key'));
+app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,8 +33,10 @@ if ('development' == app.get('env')) {
 }
 
 // Add routes here
-app.get('/', index.view);
-app.get('/hello/:userName', hello.view);
+app.get('/', hello.view);
+var hello = require("./routes/hello");
+app.get("/hello/:userName", hello.view);
+
 // Example route
 // app.get('/users', user.list);
 
